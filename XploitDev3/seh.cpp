@@ -88,27 +88,27 @@ int main() {
 	do {
 	memset(recvbuf,0,BUFLEN);
 	memset(sendbuf,0,BUFLEN);
-    recvResult = recv(csk, recvbuf, BUFLEN, 0);
-    if (recvResult > 0) {   		
+    	recvResult = recv(csk, recvbuf, BUFLEN, 0);
+    	if (recvResult > 0) {   		
 		printf("%s\n", recvbuf);
 		seh(recvbuf);
 		gets(sendbuf);
 		strcat(sendbuf,"\x0A");
-        sendResult = send(csk, sendbuf, BUFLEN, 0);
-        if (sendResult == SOCKET_ERROR) {
-            printf("Send failed: %d\n", WSAGetLastError());
-            closesocket(csk);
-            WSACleanup();
-            return 1;
-        }        
-    } else if (recvResult == 0) {
-        printf("Connection closing...\n");
+        	sendResult = send(csk, sendbuf, BUFLEN, 0);
+        	if (sendResult == SOCKET_ERROR) {
+            		printf("Send failed: %d\n", WSAGetLastError());
+            	closesocket(csk);
+            	WSACleanup();
+            	return 1;
+        	}        
+    	} else if (recvResult == 0) {
+        	printf("Connection closing...\n");
 	} else {
-        printf("Recieve failed: %d\n", WSAGetLastError());
-        closesocket(csk);
-        WSACleanup();
-        return 1;
-    }
+        	printf("Recieve failed: %d\n", WSAGetLastError());
+        	closesocket(csk);
+        	WSACleanup();
+        	return 1;
+    	}
 
 	} while (recvResult > 0);
 
